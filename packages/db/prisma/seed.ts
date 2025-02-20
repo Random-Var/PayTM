@@ -7,48 +7,50 @@ async function main() {
     where: { number: '1111111111' },
     update: {},
     create: {
+      email: 'alice123@gmail.com',
       number: '1111111111',
       password: await bcrypt.hash('alice', 10),
-      name: 'alice',
+      name: 'Alice Becker',
       Balance: {
         create: {
-          amount: 20000,
-          locked: 0
+          amount: 20000
         }
       },
-      OnRampTransaction: {
+      HDFCBank: {
         create: {
-          startTime: new Date(),
           status: "Success",
-          amount: 20000,
-          token: "token__1",
-          provider: "HDFC Bank",
-        },
-      },
+          token: "7459301",
+          direction: "In",
+          amount: 5000,
+          startTime: new Date("Jan 1, 2025 05:00:00").toUTCString(),
+          processingTime: new Date("Jan 1, 2025 05:30:00").toUTCString()
+        }
+      }
     },
   })
   const bob = await prisma.user.upsert({
     where: { number: '2222222222' },
     update: {},
     create: {
+      email: 'bob456@yahoo.com',
       number: '2222222222',
       password: await bcrypt.hash('bob', 10),
-      name: 'bob',
+      name: 'Bob Sanders',
       Balance: {
         create: {
-          amount: 2000,
-          locked: 0
+          amount: 2000
         }
       },
-      OnRampTransaction: {
+      AxisBank: {
         create: {
-          startTime: new Date(),
           status: "Failure",
+          token: "1397028",
+          direction: "In",
           amount: 2000,
-          token: "token__2",
-          provider: "HDFC Bank",
-        },
-      },
+          startTime: new Date("Jan 1, 2025 06:00:00").toUTCString(),
+          processingTime: new Date("Jan 1, 2025 06:30:00").toUTCString()
+        }
+      }
     },
   })
   console.log({ alice, bob })

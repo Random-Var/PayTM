@@ -48,9 +48,12 @@ export async function p2pTransfer(to: string, amount: number) {
                 fromUserId: Number(from),
                 toUserId: toUser.id,
                 amount,
-                timestamp: new Date()
+                timestamp: new Date().toUTCString()
             }
         })
         // locking
     });
+    return {
+        message: `Sent ₹${Number.isInteger(amount/100) ? (amount/100).toFixed(2) : (amount/100)} to ${toUser.number}`
+    }
 }
