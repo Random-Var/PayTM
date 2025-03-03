@@ -1,7 +1,7 @@
 import express from "express";
 import db from "@repo/db/client";
 const app = express();
-const PORT = 3004;
+const PORT = 3005;
 
 app.use(express.json());
 
